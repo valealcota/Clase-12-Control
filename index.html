@@ -392,24 +392,65 @@
                     >Tabla Periódica de Métodos de Visualización</a
                 >, que debe estar vinculado. Y se cierra con un comentario para la respuesta visualizada.
             </p>
+<title>Gráfico Doughnut - Tipo IES</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 500px;
+            margin: 50px auto;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
 
-            <p>
-                Usted puede modificar el orden de presentación de esta página e incluir, por ejemplo, un preámbulo que
-                pregunte qué entendemos por "carreras de Diseño" o qué tipo de instituciones concentran la mayor parte
-                de las vacantes.
-            </p>
+    <div class="chart-container">
+        <canvas id="chartIES"></canvas>
+    </div>
 
-            <p>
-                Otra alternativa es mantener el orden actual para analizar, por ejemplo, el impacto salarial en relación
-                con la inversión en el arancel, o bien transitar hacia preguntas que requieran fuentes oficiales
-                adicionales, tales como el
-                <a
-                    href="https://portal.beneficiosestudiantiles.cl/gratuidad#references_tabs_field_asociar_subproceso_tab1"
-                    target="_blank"
-                    >portal de beneficios estudiantiles</a
-                >
-                de la Subsecretaría de Educación Superior si desea abordar la gratuidad.
-            </p>
+    <script>
+        // Dtos limpios Excel
+        const data = {
+          labels: [
+            'Universidades Privadas', 
+            'Universidades Privadas CRUCH', 
+            'Universidades Estatales CRUCH'
+          ],
+          datasets: [{
+            label: 'Cantidad de Instituciones',
+            data: [11, 4, 3], 
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.7)',  
+              'rgba(255, 206, 86, 0.7)',  
+              'rgba(75, 192, 192, 0.7)'   
+            ],
+            borderColor: [
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+          }]
+        };
+
+        // Configuración
+        const config = {
+          type: 'doughnut',
+          data: data,
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { position: 'top' },
+              title: { display: true, text: 'Proporción de Universidades según su Tipo' }
+            }
+          }
+        };
+
+        // Renderizado final del gráfico en el elemento
+        const ctx = document.getElementById('chartIES').getContext('2d');
+        new Chart(ctx, config);
+    </script>
+</body>
 
             <p>
                 Sea que mantenga o modifique el orden, corresponderá revisar la pertinencia de títulos de primer,
