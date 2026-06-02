@@ -382,61 +382,71 @@
             <h4>Instituciones y sus respectivas ofertas de vacantes.</h4>
 
             <p>
-                <em>¿Qué tipo de instituciones concentran la mayor parte de las vacantes en nuestro país?.</em>. 
+                <em>¿Qué tipo de instituciones concentran la mayor parte de las vacantes en nuestro país?</em>. 
             </p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Vacantes</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <body>
 
-    <div style="position: relative; width: 40vw; height: 40vw; margin: auto;">
+    <h2 style="text-align: center; font-family: Arial, sans-serif;">Visualización de Vacantes y Tipos de Instituciones</h2>
+
+    <div style="width: 500px; height: 500px; margin: 0 auto;">
         <canvas id="graficoVacantes"></canvas>
     </div>
 
     <script>
-        // 1. Datos agrupados Excel
-        const datosExcel = {
-            labels: [
-                'Universidades Privadas',
-                'Universidades Privadas CRUCH',
-                'Universidades Estatales CRUCH'
-            ],
-            datasets: [{
-                label: 'Vacantes Semestre Uno',
-                data: [810, 370, 200], // Totales sumados archivo
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.8)',   // Azul
-                    'rgba(255, 99, 132, 0.8)',   // Rosado/Rojo
-                    'rgba(255, 205, 86, 0.8)'    // Amarillo
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 205, 86, 1)'
-                ],
-                borderWidth: 1,
-                hoverOffset: 4
-            }]
-        };
+        // 
+        window.onload = function() {
+            try {
+                // 1. Datos del Excel sumados
+                const datosExcel = {
+                    labels: [
+                        'Universidades Privadas',
+                        'Universidades Privadas CRUCH',
+                        'Universidades Estatales CRUCH'
+                    ],
+                    datasets: [{
+                        label: 'Vacantes Semestre Uno',
+                        data: [810, 370, 200], 
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.8)',   // Azul
+                            'rgba(255, 99, 132, 0.8)',   // Rosado
+                            'rgba(255, 205, 86, 0.8)'    // Amarillo
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 205, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                };
 
-        // 2. (Doughnut)
-        const config = {
-            type: 'doughnut',
-            data: datosExcel,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top', // Posición de las etiquetas (top, bottom, left, right)
-                    },
-                    title: {
-                        display: true,
-                        text: 'Distribución de Vacantes por Tipo de IES'
+                // 2. Configuración
+                const config = {
+                    type: 'doughnut',
+                    data: datosExcel,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
                     }
-                }
+                };
+
+                // 3. Renderizado
+                const ctx = document.getElementById('graficoVacantes').getContext('2d');
+                new Chart(ctx, config);
+                
+                console.log("¡Gráfico cargado con éxito!");
+            } catch (error) {
+                console.error("Hubo un error al cargar el gráfico:", error);
             }
         };
-
-        // 3. 
-        const ctx = document.getElementById('graficoVacantes').getContext('2d');
-        new Chart(ctx, config);
     </script>
 </body>
 
