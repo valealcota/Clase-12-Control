@@ -384,64 +384,61 @@
             <p>
                 <em>¿Qué tipo de instituciones concentran la mayor parte de las vacantes en nuestro país?.</em>. 
             </p>
-<title>Gráfico Doughnut - Tipo IES</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .chart-container {
-            width: 500px;
-            margin: 50px auto;
-            font-family: Arial, sans-serif;
-        }
-    </style>
-</head>
 <body>
 
-    <div class="chart-container">
-        <canvas id="chartIES"></canvas>
+    <div style="position: relative; width: 40vw; height: 40vw; margin: auto;">
+        <canvas id="graficoVacantes"></canvas>
     </div>
 
     <script>
-        // Dtos limpios Excel
-        const data = {
-          labels: [
-            'Universidades Privadas', 
-            'Universidades Privadas CRUCH', 
-            'Universidades Estatales CRUCH'
-          ],
-          datasets: [{
-            label: 'Cantidad de Instituciones',
-            data: [11, 4, 3], 
-            backgroundColor: [
-              'rgba(54, 162, 235, 0.7)',  
-              'rgba(255, 206, 86, 0.7)',  
-              'rgba(75, 192, 192, 0.7)'   
+        // 1. Datos agrupados Excel
+        const datosExcel = {
+            labels: [
+                'Universidades Privadas',
+                'Universidades Privadas CRUCH',
+                'Universidades Estatales CRUCH'
             ],
-            borderColor: [
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-          }]
+            datasets: [{
+                label: 'Vacantes Semestre Uno',
+                data: [810, 370, 200], // Totales sumados archivo
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.8)',   // Azul
+                    'rgba(255, 99, 132, 0.8)',   // Rosado/Rojo
+                    'rgba(255, 205, 86, 0.8)'    // Amarillo
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 205, 86, 1)'
+                ],
+                borderWidth: 1,
+                hoverOffset: 4
+            }]
         };
 
-        // Configuración
+        // 2. (Doughnut)
         const config = {
-          type: 'doughnut',
-          data: data,
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { position: 'top' },
-              title: { display: true, text: 'Proporción de Universidades según su Tipo' }
+            type: 'doughnut',
+            data: datosExcel,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top', // Posición de las etiquetas (top, bottom, left, right)
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribución de Vacantes por Tipo de IES'
+                    }
+                }
             }
-          }
         };
 
-        // Renderizado final del gráfico en el elemento
-        const ctx = document.getElementById('chartIES').getContext('2d');
+        // 3. 
+        const ctx = document.getElementById('graficoVacantes').getContext('2d');
         new Chart(ctx, config);
     </script>
+
 </body>
 
             <p>
@@ -458,9 +455,9 @@
 
         <footer>
             <div>
-                <a href="https://upla.cl/noticias/2025/06/26/cuech-destaca-aporte-irreemplazable-de-las-universidades-estatales-para-el-desarrollo-nacional-y-regional/" target="_blank"</a>
-            <a href="https://www.ciperchile.cl/2023/12/01/universidades-en-crisis-nuevas-alertas-para-la-educacion-superior/" target="_blank"</a>
-            <a href="https://www.latercera.com/la-tercera-pm/noticia/la-u-del-desarrollo-tambien-se-entusiasma-con-entrar-al-cruch-hay-universidades-que-estan-afuera-que-son-mejores-que-las-que-estan-adentro/334160/" target="_blank"</a>
+                <a href="https://upla.cl/noticias/2025/06/26/cuech-destaca-aporte-irreemplazable-de-las-universidades-estatales-para-el-desarrollo-nacional-y-regional/"</a>
+            <a href="https://www.ciperchile.cl/2023/12/01/universidades-en-crisis-nuevas-alertas-para-la-educacion-superior/"</a>
+            <a href="https://www.latercera.com/la-tercera-pm/noticia/la-u-del-desarrollo-tambien-se-entusiasma-con-entrar-al-cruch-hay-universidades-que-estan-afuera-que-son-mejores-que-las-que-estan-adentro/334160/"</a>
                     
                 <a href="https://github.com/profesorfaco/troncal">Diseño y visualización de información</a>
             </div>
